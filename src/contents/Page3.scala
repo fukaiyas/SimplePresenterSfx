@@ -36,20 +36,21 @@ class Page3 extends PageController with Initializable {
 
     var index = 0
 
-    def initialize(url: URL, rb: ResourceBundle): Unit = {
+    override def initialize(url: URL, rb: ResourceBundle): Unit = {
+
         p1.setOpacity(0.0)
         p2.setOpacity(0.0)
     }
 
-    def doAction(): Boolean = {
-        def fade(n : Node) : Boolean = {
+    override def doAction(fw : => Unit): Unit = {
+
+        def fade(n : Node) : Unit = {
             new FadeTransition{
                 duration = new Duration(1000L)
                 node = n
                 toValue = 1.0
             }.play
             index += 1
-            true
         }
         index match {
             case 0 => fade(p1)
@@ -82,9 +83,8 @@ class Page3 extends PageController with Initializable {
                     )
                 }.play
                 index += 1
-                true
 
-            case _ => false
+            case _ => fw
         }
     }
 }

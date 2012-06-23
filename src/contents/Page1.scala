@@ -27,7 +27,7 @@ class Page1 extends PageController with Initializable {
         p1.setOpacity(0.0)
     }
     
-    override def doAction() : Boolean = {
+    override def doAction(fw : => Unit) : Unit = {
 
         p1.getOpacity match {
             case 0.0 =>
@@ -36,8 +36,7 @@ class Page1 extends PageController with Initializable {
                     node = p1
                     toValue = 1.0
                 }.play
-                true
-            case _ => false
+            case _ => fw
         }
     }
 }

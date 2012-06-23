@@ -36,7 +36,7 @@ class SimplePresenter extends Application{
     override def start(st: javafx.stage.Stage): Unit = {
 
         val root = new Group{
-            onMouseClicked = doAction(this)
+            onMouseClicked = presentController.doAction(goForward(this))
         }
         new Stage(st){
             delegate.initStyle(StageStyle.TRANSPARENT)
@@ -47,13 +47,8 @@ class SimplePresenter extends Application{
         goForward(root)
     }
 
-    def doAction(root : Group) : Unit = {
-        if(!presentController.doAction()){
-            goForward(root)
-        }
-    }
-
     def goForward(root : Group) : Unit = {
+
         val url = getClass.getResource(pages(pageIndex))
         val loader = new FXMLLoader(url)
         val next = loader.load match {
@@ -96,5 +91,5 @@ class SimplePresenter extends Application{
 }
 
 trait PageController{
-    def doAction() : Boolean
+    def doAction(fw : => Unit) : Unit
 }

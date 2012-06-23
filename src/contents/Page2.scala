@@ -21,11 +21,11 @@ class Page2 extends PageController with Initializable {
     @FXML
     var p1 : Text = _
 
-    def initialize(url : URL, rb : ResourceBundle) : Unit = {
+    override def initialize(url : URL, rb : ResourceBundle) : Unit = {
         p1.setOpacity(0.0)
     }
 
-    def doAction() : Boolean = {
+    override def doAction(fw : => Unit) : Unit = {
 
         p1.getOpacity match {
             case 0.0 =>
@@ -36,8 +36,7 @@ class Page2 extends PageController with Initializable {
                     fromY = SimplePresenter.sceneheight
                     toY = 0.0
                 }.play
-                true
-            case _ => false
+            case _ => fw
         }
     }
 }
