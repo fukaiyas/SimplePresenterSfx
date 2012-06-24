@@ -24,60 +24,63 @@ object SimplePresenter {
 
 class SimplePresenter extends Application{
 
+    // 表示するページ群
     val pages = Array(
             "/contents/page1.fxml",
             "/contents/page2.fxml",
             "/contents/page3.fxml")
 
-    val nodeId = pages.map{ page =>
-        val loader = new FXMLLoader(getClass.getResource(page))
-        loader.load match {
-            case x : Node => x.getId
-            case _ => throw new ClassCastException
-        }
-    }
+    // 現在表示しているページ番号
+    var index = 0
 
     override def start(st: javafx.stage.Stage): Unit = {
 
         val root = new Group
         new Stage(st){
+            // ステージを透明にする
             delegate.initStyle(StageStyle.TRANSPARENT)
             scene = new Scene(root, SimplePresenter.scenewidth, SimplePresenter.sceneheight){
                 fill = null
             }
         }.show
+
+        // 最初のページを表示する
         goForward(root)
     }
 
+    // ページを進める
     def goForward(root : Group) : Unit = {
 
-        val children = root.getChildren
-        val index = children.size match {
-            case 0 => nodeId.length
-            case _ => nodeId.indexOf(children.reverse.head.getId)
-        }
-        val nextindex = index match {
-            case x if x < nodeId.length - 1 => index + 1
-            case _ => 0
-        }
-        val url = getClass.getResource(pages(nextindex))
+        // 次のページをロードして、表示する
+        val url = getClass.getResource(pages(index))
         val loader = new FXMLLoader(url)
         val next = loader.load match {
             case x : Node => x
             case _ => throw new ClassCastException
         }
-        children.add(next)
-        val controller = loader.getController match {
-            case x : PageController => x
+        root.getChildren.add(next)
+        loader.getController match {
+            // マウスクリックされたら、進める
+            // アニメーションがもうなければ、doAction内でgoForwardを実行する
+            case x : PageController => root.onMouseClicked = x.doAction(goForward(root))
             case _ => throw new ClassCastException
         }
-        root.onMouseClicked = controller.doAction(goForward(root))
 
+        // ページ遷移のアニメーションを行う
         translatePage(root, next)
+
+        // ページインデックスを進める
+        // 最後までいったら最初に戻す
+        index match {
+            case x if x < pages.length - 1 => index += 1
+            case _ => index = 0
+        }
     }
 
+    // ページ遷移アニメーション
     def translatePage(root : Group, next : Node) : Unit = {
 
+        // 新しいページを右からスライドさせるアニメーション
         new TranslateTransition{
             duration = new Duration(1000)
             node = next
@@ -86,11 +89,15 @@ class SimplePresenter extends Application{
         }.play
         
         if(root.getChildren.size > 1){
+            // 現在表示しているページがあれば、
+            // 左にスライドさせる
             def remove(n : Node) : Unit = root.getChildren.remove(n)
             new TranslateTransition{
                 duration = new Duration(1000)
                 node = root.getChildren.get(0)
                 toX = - SimplePresenter.scenewidth
+                // アニメーションが終了したら、
+                // シーングラフから削除する
                 onFinished = remove(node()) 
             }.play
         }

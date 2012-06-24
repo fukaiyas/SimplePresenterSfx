@@ -78,7 +78,7 @@ class Page3 extends PageController with Initializable {
                     	new FadeTransition{
                     	    duration = new Duration(1000L)
                     	    node = pane
-                    	    toValue = 0.0
+                    	    toValue = 0.1
                     	}
                     )
                 }.play
