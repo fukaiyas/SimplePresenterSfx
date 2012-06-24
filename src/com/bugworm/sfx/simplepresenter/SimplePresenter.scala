@@ -27,17 +27,19 @@ class SimplePresenter extends Application{
     val pages = Array(
             "/contents/page1.fxml",
             "/contents/page2.fxml",
-    		"/contents/page3.fxml")
+            "/contents/page3.fxml")
 
-    var pageIndex = 0
-
-    var presentController : PageController = _
+    val nodeId = pages.map{ page =>
+        val loader = new FXMLLoader(getClass.getResource(page))
+        loader.load match {
+            case x : Node => x.getId
+            case _ => throw new ClassCastException
+        }
+    }
 
     override def start(st: javafx.stage.Stage): Unit = {
 
-        val root = new Group{
-            onMouseClicked = presentController.doAction(goForward(this))
-        }
+        val root = new Group
         new Stage(st){
             delegate.initStyle(StageStyle.TRANSPARENT)
             scene = new Scene(root, SimplePresenter.scenewidth, SimplePresenter.sceneheight){
@@ -49,24 +51,29 @@ class SimplePresenter extends Application{
 
     def goForward(root : Group) : Unit = {
 
-        val url = getClass.getResource(pages(pageIndex))
+        val children = root.getChildren
+        val index = children.size match {
+            case 0 => nodeId.length
+            case _ => nodeId.indexOf(children.reverse.head.getId)
+        }
+        val nextindex = index match {
+            case x if x < nodeId.length - 1 => index + 1
+            case _ => 0
+        }
+        val url = getClass.getResource(pages(nextindex))
         val loader = new FXMLLoader(url)
         val next = loader.load match {
             case x : Node => x
             case _ => throw new ClassCastException
         }
-        root.getChildren.add(next)
-        presentController = loader.getController match {
+        children.add(next)
+        val controller = loader.getController match {
             case x : PageController => x
             case _ => throw new ClassCastException
         }
+        root.onMouseClicked = controller.doAction(goForward(root))
 
         translatePage(root, next)
-
-        pageIndex match {
-            case x if x < pages.length - 1 => pageIndex += 1
-            case _ => pageIndex = 0
-        }
     }
 
     def translatePage(root : Group, next : Node) : Unit = {

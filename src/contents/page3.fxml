@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" fx:id="pane" prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml" fx:controller="contents.Page3">
+<AnchorPane id="page3" fx:id="pane" prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml" fx:controller="contents.Page3">
   <children>
     <ImageView fx:id="p0" fitHeight="600.0" fitWidth="800.0" preserveRatio="true">
       <image>
