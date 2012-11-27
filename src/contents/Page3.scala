@@ -57,32 +57,32 @@ class Page3 extends PageController with Initializable {
 
             case 1 => fade(p2)
 
-            case 2 =>
-                val rect = new Rectangle{
-        	        x = 0.0
-        	        y = 0.0
-        	        width = SimplePresenter.scenewidth
-        	        height = SimplePresenter.sceneheight
-        	        fill = null
-        	    }
-                pane.getChildren.add(rect)
-
-                new SequentialTransition{
-                    children = Seq(
-                    	new FillTransition{
-                    	    duration = new Duration(5000L)
-                    	    shape = rect
-                    	    fromValue = Color.rgb(0x00, 0x00, 0x00, 0.0)
-                    	    toValue = Color.web("#000033")
-                    	},
-                    	new FadeTransition{
-                    	    duration = new Duration(1000L)
-                    	    node = pane
-                    	    toValue = 0.1
-                    	}
-                    )
-                }.play
-                index += 1
+//            case 2 =>
+//                val rect = new Rectangle{
+//        	        x = 0.0
+//        	        y = 0.0
+//        	        width = SimplePresenter.scenewidth
+//        	        height = SimplePresenter.sceneheight
+//        	        fill = null
+//        	    }
+//                pane.getChildren.add(rect)
+//
+//                new SequentialTransition{
+//                    children = Seq(
+//                    	new FillTransition{
+//                    	    duration = new Duration(5000L)
+//                    	    shape = rect
+//                    	    fromValue = Color.rgb(0x00, 0x00, 0x00, 0.0)
+//                    	    toValue = Color.web("#000033")
+//                    	},
+//                    	new FadeTransition{
+//                    	    duration = new Duration(1000L)
+//                    	    node = pane
+//                    	    toValue = 0.1
+//                    	}
+//                    )
+//                }.play
+//                index += 1
 
             case _ => fw
         }

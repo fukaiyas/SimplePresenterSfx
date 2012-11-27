@@ -24,19 +24,19 @@ class Page1 extends PageController with Initializable {
     var p1 : Text = _
     
     override def initialize(url : URL, rb : ResourceBundle) : Unit = {
-        p1.setOpacity(0.0)
+//        p1.setOpacity(0.0)
     }
     
     override def doAction(fw : => Unit) : Unit = {
-
-        p1.getOpacity match {
-            case 0.0 =>
-                new FadeTransition{
-                    duration = new Duration(1000L)
-                    node = p1
-                    toValue = 1.0
-                }.play
-            case _ => fw
-        }
+        fw
+//        p1.getOpacity match {
+//            case 0.0 =>
+//                new FadeTransition{
+//                    duration = new Duration(1000L)
+//                    node = p1
+//                    toValue = 1.0
+//                }.play
+//            case _ => fw
+//        }
     }
 }
