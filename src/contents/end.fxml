@@ -10,7 +10,7 @@
 
 <AnchorPane id="page1" prefHeight="768.0" prefWidth="1024.0" xmlns:fx="http://javafx.com/fxml" fx:controller="contents.Empty">
   <children>
-    <Label layoutX="48.0" layoutY="48.0" prefHeight="119.0" prefWidth="772.0" text="ScalaFXのしくみをまなぶ">
+    <Label alignment="CENTER" layoutX="44.0" layoutY="325.0" prefHeight="119.0" prefWidth="936.0" text="ありがとうございました">
       <font>
         <Font name="System Bold" size="64.0" />
       </font>

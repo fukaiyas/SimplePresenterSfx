@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="page2" prefHeight="768.0" prefWidth="1024.0" xmlns:fx="http://javafx.com/fxml" fx:controller="contents.Page2">
+<AnchorPane id="page2" prefHeight="768.0" prefWidth="1024.0" xmlns:fx="http://javafx.com/fxml" fx:controller="contents.Empty">
   <children>
     <Label layoutX="48.0" layoutY="48.0" prefHeight="119.0" prefWidth="317.0" text="自己紹介">
       <font>

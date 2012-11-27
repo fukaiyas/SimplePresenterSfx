@@ -40,7 +40,10 @@ class SimplePresenter extends Application{
     val pages = Array(
             "/contents/page1.fxml",
             "/contents/page2.fxml",
-            "/contents/page3.fxml")
+            "/contents/page3.fxml",
+            "/contents/page4.fxml",
+            "/contents/end.fxml"
+    )
 
     var index = 0
 
@@ -58,7 +61,7 @@ class SimplePresenter extends Application{
         }.show
 
         // 最初のページを表示する
-        newPage(rootpane, fadeInOut(rootpane))
+        newPage(rootpane, changePage(rootpane))
     }
 
     def typed(event : KeyEvent, root : StackPane) : Unit = {
