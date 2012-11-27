@@ -13,10 +13,23 @@ import scalafx.scene.Group
 import scalafx.scene.Scene
 import scalafx.stage.Stage.sfxStage2jfx
 import scalafx.stage.Stage
+import scalafx.animation.FadeTransition
+import scalafx.animation.FadeTransition._
+import scalafx.scene.layout.StackPane
+import scalafx.scene.Parent
+import javafx.scene.layout.Pane
+import scalafx.scene.image.ImageView
+import scalafx.scene.image.ImageView._
+import scalafx.scene.image.Image
+import scalafx.scene.image.Image._
+import java.net.URL
+import javafx.scene.layout.AnchorPane
+import javafx.scene.input.KeyEvent
+import javafx.scene.input.KeyCode
 
 object SimplePresenter {
-    val scenewidth = 800.0
-    val sceneheight = 600.0
+    val scenewidth = 1024.0
+    val sceneheight = 768.0
     def main(args : Array[String]) : Unit = {
         Application.launch(classOf[SimplePresenter], args:_*)
     }
@@ -24,32 +37,62 @@ object SimplePresenter {
 
 class SimplePresenter extends Application{
 
-    // 表示するページ群
     val pages = Array(
             "/contents/page1.fxml",
             "/contents/page2.fxml",
             "/contents/page3.fxml")
 
-    // 現在表示しているページ番号
     var index = 0
 
     override def start(st: javafx.stage.Stage): Unit = {
 
-        val root = new Group
+        val rootpane = new StackPane
+
         new Stage(st){
             // ステージを透明にする
             delegate.initStyle(StageStyle.TRANSPARENT)
-            scene = new Scene(root, SimplePresenter.scenewidth, SimplePresenter.sceneheight){
+            scene = new Scene(rootpane, SimplePresenter.scenewidth, SimplePresenter.sceneheight){
                 fill = null
+                onKeyPressed = {e : KeyEvent => typed(e, rootpane)}
             }
         }.show
 
         // 最初のページを表示する
-        goForward(root)
+        newPage(rootpane, fadeInOut(rootpane))
     }
 
-    // ページを進める
-    def goForward(root : Group) : Unit = {
+    def typed(event : KeyEvent, root : StackPane) : Unit = {
+        event.code match{
+	        case KeyCode.LEFT => prePage(root)
+	        case KeyCode.RIGHT => postPage(root)
+	        case KeyCode.Q => System.exit(0)
+	        case _ =>
+        }
+    }
+
+    def prePage(root : StackPane) : Unit = {
+        if(index > 0){
+            index -= 1
+            newPage(root, changePage(root))
+        }
+    }
+
+    def postPage(root : StackPane) : Unit = {
+        if(index < pages.length - 1){
+            index += 1
+            newPage(root, changePage(root))
+        }
+    }
+
+    def click(root : StackPane) : Unit = {
+        if(index < pages.length - 1){
+            index += 1
+            newPage(root, fadeInOut(root))
+        }
+    }
+
+    // ページを変える
+    def newPage(root : StackPane, change : Node => Unit) : Unit = {
 
         // 次のページをロードして、表示する
         val url = getClass.getResource(pages(index))
@@ -58,46 +101,49 @@ class SimplePresenter extends Application{
             case x : Node => x
             case _ => throw new ClassCastException
         }
-        root.getChildren.add(next)
-        loader.getController match {
-            // マウスクリックされたら、進める
-            // アニメーションがもうなければ、doAction内でgoForwardを実行する
-            case x : PageController => root.onMouseClicked = x.doAction(goForward(root))
-            case _ => throw new ClassCastException
-        }
 
-        // ページ遷移のアニメーションを行う
-        translatePage(root, next)
+        //バックは共通で
+        val backurl = getClass.getResource("/contents/base.fxml")
+        val back = FXMLLoader.load[AnchorPane](backurl)
 
-        // ページインデックスを進める
-        // 最後までいったら最初に戻す
-        index match {
-            case x if x < pages.length - 1 => index += 1
-            case _ => index = 0
+        val parent = new StackPane
+        parent.getChildren.addAll(back, next)
+        parent.opacity = 0.0
+
+        root.getChildren.add(parent)
+        root.onMouseClicked = loader.getController[PageController].doAction(click(root))
+
+        change(parent)
+    }
+
+    //即切り替え
+    def changePage(root : StackPane)(next : Node) : Unit = {
+        next.opacity = 1.0
+        if(root.getChildren.size > 1){
+            root.getChildren.remove(0)
         }
     }
 
-    // ページ遷移アニメーション
-    def translatePage(root : Group, next : Node) : Unit = {
+    //フェードイン・フェードアウト
+    def fadeInOut(root : StackPane)(next : Node) : Unit = {
 
-        // 新しいページを右からスライドさせるアニメーション
-        new TranslateTransition{
+        // 新しいページをフェードイン
+        new FadeTransition{
+            delay = new Duration(300)
             duration = new Duration(1000)
             node = next
-            fromX = SimplePresenter.scenewidth
-            toX = 0
+            fromValue = 0.0
+            toValue = 1.0
         }.play
         
         if(root.getChildren.size > 1){
-            // 現在表示しているページがあれば、
-            // 左にスライドさせる
+            // 現在表示しているページがあればフェードアウト
             def remove(n : Node) : Unit = root.getChildren.remove(n)
-            new TranslateTransition{
+            new FadeTransition{
                 duration = new Duration(1000)
                 node = root.getChildren.get(0)
-                toX = - SimplePresenter.scenewidth
-                // アニメーションが終了したら、
-                // シーングラフから削除する
+                fromValue = 1.0
+                toValue = 0.0
                 onFinished = remove(node()) 
             }.play
         }
