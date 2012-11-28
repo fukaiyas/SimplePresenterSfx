@@ -42,6 +42,10 @@ class SimplePresenter extends Application{
             "/contents/page2.fxml",
             "/contents/page3.fxml",
             "/contents/page4.fxml",
+            "/contents/page5.fxml",
+            "/contents/page6.fxml",
+            "/contents/page7.fxml",
+            "/contents/page8.fxml",
             "/contents/end.fxml"
     )
 
