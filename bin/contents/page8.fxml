@@ -15,7 +15,7 @@
         <Font name="System Bold" size="64.0" fx:id="x1" />
       </font>
     </Label>
-    <Label layoutX="76.0" layoutY="167.0" prefHeight="85.0" prefWidth="903.0" text="scalafx.Includes が XxxInclude をたくさんMix-in">
+    <Label layoutX="76.0" layoutY="167.0" prefHeight="85.0" prefWidth="882.0" text="scalafx.Includes が XxxInclude をたくさん継承">
       <font>
         <Font name="System Bold" size="40.0" fx:id="x2" />
       </font>

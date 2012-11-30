@@ -45,7 +45,12 @@ class SimplePresenter extends Application{
             "/contents/page5.fxml",
             "/contents/page6.fxml",
             "/contents/page7.fxml",
+            "/contents/page7_1.fxml",
             "/contents/page8.fxml",
+            "/contents/page9.fxml",
+            "/contents/demo.fxml",
+            "/contents/conclusion.fxml",
+            "/contents/scalaconf1.fxml",
             "/contents/end.fxml"
     )
 
