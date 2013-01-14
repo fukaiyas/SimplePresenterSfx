@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="page2" prefHeight="768.0" prefWidth="1024.0" xmlns:fx="http://javafx.com/fxml" fx:controller="contents.Empty">
+  <children>
+    <Label layoutX="48.0" layoutY="48.0" prefHeight="119.0" prefWidth="807.0" text="ScalaFXのしくみをまなぶ">
+      <font>
+        <Font name="System Bold" size="64.0" fx:id="x1" />
+      </font>
+    </Label>
+    <Label layoutX="124.0" layoutY="167.0" prefHeight="119.0" prefWidth="731.0" text="今まで使ってみて理解したこと">
+      <font>
+        <Font name="System Bold" size="48.0" fx:id="x2" />
+      </font>
+    </Label>
+    <Label font="$x2" layoutX="124.0" layoutY="286.0" prefHeight="119.0" prefWidth="731.0" text="ちょっとデモ" />
+  </children>
+</AnchorPane>

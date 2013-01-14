@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="page2" prefHeight="768.0" prefWidth="1024.0" xmlns:fx="http://javafx.com/fxml" fx:controller="contents.Empty">
+  <children>
+    <Label layoutX="48.0" layoutY="48.0" prefHeight="119.0" prefWidth="317.0" text="自己紹介">
+      <font>
+        <Font name="System Bold" size="64.0" fx:id="x1" />
+      </font>
+    </Label>
+    <Label font="$x1" layoutX="124.0" layoutY="167.0" prefHeight="119.0" prefWidth="317.0" text="深井 康行" />
+    <Label font="$x1" layoutX="476.0" layoutY="167.0" prefHeight="119.0" prefWidth="393.0" text="\@fukai_yas" />
+    <Label layoutX="79.0" layoutY="375.0" prefHeight="119.0" prefWidth="731.0" text="某SIer勤務">
+      <font>
+        <Font name="System Bold" size="48.0" fx:id="x2" />
+      </font>
+    </Label>
+    <Label font="$x2" layoutX="79.0" layoutY="494.0" prefHeight="119.0" prefWidth="918.0" text="趣味ではJava/Scala、仕事ではJava (JDK5)" />
+  </children>
+</AnchorPane>
