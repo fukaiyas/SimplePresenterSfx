@@ -26,13 +26,10 @@ import java.net.URL
 import javafx.scene.layout.AnchorPane
 import javafx.scene.input.KeyEvent
 import javafx.scene.input.KeyCode
+import com.bugworm.sfx.application.SFXApplication
 
-object SimplePresenter {
-    val scenewidth = 1024.0
-    val sceneheight = 768.0
-    def main(args : Array[String]) : Unit = {
-        Application.launch(classOf[SimplePresenter], args:_*)
-    }
+object SimplePresenter extends SFXApplication[SimplePresenter]{
+    val app = classOf[SimplePresenter]
 }
 
 class SimplePresenter extends Application{
@@ -63,7 +60,7 @@ class SimplePresenter extends Application{
         new Stage(st){
             // ステージを透明にする
             delegate.initStyle(StageStyle.TRANSPARENT)
-            scene = new Scene(rootpane, SimplePresenter.scenewidth, SimplePresenter.sceneheight){
+            scene = new Scene(rootpane, 1024, 768){
                 fill = null
                 onKeyPressed = {e : KeyEvent => typed(e, rootpane)}
             }
