@@ -61,7 +61,7 @@ class SFXPresenter extends SFXApplication {
             case _ => throw new ClassCastException
         }
         val lcon = loader.getController[PageController]
-        val controller = if(lcon == null) new DefaultController else lcon
+        val controller = Option(lcon).getOrElse(new DefaultController)
         controller.sfxPresenter = this
         rootpane.children.add(next)
         rootpane.onMouseClicked = {
