@@ -60,8 +60,8 @@ class SFXPresenter extends SFXApplication {
             case x : javafx.scene.Node => x
             case _ => throw new ClassCastException
         }
-        val controller = loader.getController[PageController]
-        //TODO デフォルトコントローラを入れる
+        val lcon = loader.getController[PageController]
+        val controller = if(lcon == null) new DefaultController else lcon
         controller.sfxPresenter = this
         rootpane.children.add(next)
         rootpane.onMouseClicked = {

@@ -18,3 +18,16 @@ abstract class PageController {
      */
     def action() : Unit
 }
+
+/**
+ * 単に次のページに進むデフォルトのPageController
+ */
+class DefaultController extends PageController{
+
+    /**
+     * 次のページに進む
+     */
+    def action(){
+        sfxPresenter.movePage(1)
+    }
+}
