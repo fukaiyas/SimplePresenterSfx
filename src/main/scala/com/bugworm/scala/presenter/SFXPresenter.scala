@@ -8,8 +8,14 @@ import scalafx.scene.input._
 import scalafx.Includes._
 import javafx.fxml.FXMLLoader
 
+/**
+ * デフォルト起動用object
+ */
 object SFXPresenter extends SFXAppMain(classOf[SFXPresenter])
 
+/**
+ * ScalaFXを使ったプレゼンテーション実行クラス
+ */
 class SFXPresenter extends SFXApplication {
 
     /** ルートとして使うStackPane */
@@ -56,10 +62,11 @@ class SFXPresenter extends SFXApplication {
         }
         val controller = loader.getController[PageController]
         //TODO デフォルトコントローラを入れる
+        controller.sfxPresenter = this
         rootpane.children.add(next)
         rootpane.onMouseClicked = {
             controller.actionNumber += 1
-            controller.doAction()
+            controller.action()
         }
     }
 

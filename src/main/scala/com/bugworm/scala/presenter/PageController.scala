@@ -2,9 +2,19 @@ package com.bugworm.scala.presenter
 import javafx.fxml.FXML
 import javafx.scene.Node
 
-trait PageController {
+/**
+ * ページごとのアクションを実装するための親クラス
+ */
+abstract class PageController {
 
+    /** 実行クラス */
+    var sfxPresenter : SFXPresenter = _
+
+    /** 現在のアクション回数 */
     var actionNumber : Int = 0
 
-    def doAction() : Unit
+    /**
+     * このメソッドにアクションを実装する
+     */
+    def action() : Unit
 }
