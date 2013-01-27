@@ -30,6 +30,7 @@ import com.bugworm.sfx.application.SFXApplication
 import com.bugworm.sfx.application.SFXAppMain
 import com.bugworm.sfx.application.SFXApplication
 import scalafx.application.JFXApp
+import scalafx.application.AppHelper
 
 object SimplePresenter extends SFXAppMain(classOf[SimplePresenter])
 
@@ -56,7 +57,6 @@ class SimplePresenter extends SFXApplication{
 
     val rootpane = new StackPane
 
-    JFXApp.AUTO_SHOW = false
     new Stage{
         // ステージを透明にする
         delegate.initStyle(StageStyle.TRANSPARENT)
@@ -64,7 +64,7 @@ class SimplePresenter extends SFXApplication{
             fill = null
             onKeyPressed = {e : KeyEvent => typed(e, rootpane)}
         }
-    }.show
+    }
 
     // 最初のページを表示する
     newPage(rootpane, changePage(rootpane))
@@ -73,7 +73,7 @@ class SimplePresenter extends SFXApplication{
         event.code match{
 	        case KeyCode.LEFT => prePage(root)
 	        case KeyCode.RIGHT => postPage(root)
-	        case KeyCode.Q => System.exit(0)
+	        case KeyCode.Q => JFXApp.STAGE.close
 	        case _ =>
         }
     }

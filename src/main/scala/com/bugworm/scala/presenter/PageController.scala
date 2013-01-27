@@ -1,6 +1,10 @@
 package com.bugworm.scala.presenter
+import javafx.fxml.FXML
+import javafx.scene.Node
 
 trait PageController {
 
-    def doAction(fw : => Unit) : Unit
+    var actionNumber : Int = 0
+
+    def doAction() : Unit
 }
