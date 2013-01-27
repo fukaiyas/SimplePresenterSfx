@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color : LIGHTBLUE;" xmlns:fx="http://javafx.com/fxml">
+  <children>
+    <Label alignment="CENTER" layoutX="112.0" layoutY="112.0" prefHeight="100.0" prefWidth="800.0" style="-fx-background-color : LIGHTGREEN;&#10;&#10;" text="Sample Presentation">
+      <font>
+        <Font name="Meiryo Bold" size="40.0" fx:id="x1" />
+      </font>
+    </Label>
+    <Label alignment="CENTER" font="$x1" layoutX="330.0" layoutY="384.0" prefHeight="61.0" prefWidth="364.0" style="-fx-background-color : BLUE;&#10;&#10;" text="action test" textFill="WHITE" />
+  </children>
+</AnchorPane>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color : LIGHTBLUE;" xmlns:fx="http://javafx.com/fxml">
+  <children>
+    <Label alignment="CENTER" layoutX="112.0" layoutY="112.0" prefHeight="100.0" prefWidth="800.0" style="-fx-background-color : LIGHTGREEN;&#10;&#10;" text="2nd Page">
+      <font>
+        <Font name="Meiryo Bold" size="40.0" />
+      </font>
+    </Label>
+  </children>
+</AnchorPane>
