@@ -64,7 +64,7 @@ class SFXPresenter extends SFXApplication {
         val controller = Option(lcon).getOrElse(new DefaultController)
         controller.sfxPresenter = this
         rootpane.children.add(next)
-        rootpane.onMouseClicked = {
+        rootpane.onMouseClicked = {event : MouseEvent =>
             controller.actionNumber += 1
             controller.action()
         }
