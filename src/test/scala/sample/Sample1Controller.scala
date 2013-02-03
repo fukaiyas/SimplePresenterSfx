@@ -28,7 +28,8 @@ class Sample1Controller extends PageController with Initializable{
                     actionLabel.scaleY -> 1,
                     actionLabel.rotate -> 720
                 )}).play()
-            case _ => sfxPresenter.movePage(1)
+            case _ =>
+                sfxPresenter.movePage(1)
         }
     }
 }

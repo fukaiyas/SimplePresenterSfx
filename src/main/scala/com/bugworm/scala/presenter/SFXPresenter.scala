@@ -24,6 +24,9 @@ class SFXPresenter extends SFXApplication {
     /** 表示するインデックス */
     var index = 0;
 
+    /** 現在のコントローラ */
+    var controller : PageController = _
+
     /**
      * 使用するページのURL文字列をArrayとして返す。
      * 
@@ -33,7 +36,7 @@ class SFXPresenter extends SFXApplication {
      */
     def pages() : Array[String] = {
         //TODO default : load "/contents/pages.txt"
-        Array("/contents/sample1.fxml", "/contents/sample2.fxml")
+        Array("/contents/sample1.fxml", "/contents/sample2.fxml", "/contents/sample3.fxml")
     }
 
     /**
@@ -43,16 +46,16 @@ class SFXPresenter extends SFXApplication {
      */
     def movePage(d : Int){
         if(pages.isDefinedAt(index + d)){
+            controller.dispose()
             index += d
-            loadPage()
-            removePage()
+            loadCurrentPage()
         }
     }
 
     /**
      * 現在のインデックスで新しいページをロードしてrootpaneの子としてaddする。
      */
-    def loadPage(){
+    def loadCurrentPage(){
 
         val url = getClass.getResource(pages()(index))
         val loader = new FXMLLoader(url)
@@ -61,21 +64,14 @@ class SFXPresenter extends SFXApplication {
             case _ => throw new ClassCastException
         }
         val lcon = loader.getController[PageController]
-        val controller = Option(lcon).getOrElse(new DefaultController)
+        controller = Option(lcon).getOrElse(new DefaultController)
         controller.sfxPresenter = this
         rootpane.children.add(next)
+        controller.target = next
         rootpane.onMouseClicked = {event : MouseEvent =>
             controller.actionNumber += 1
             controller.action()
         }
-    }
-
-    /**
-     * rootpaneの持つ子要素のうち、最後以外を削除する
-     */
-    def removePage(){
-        val size = rootpane.children.size
-        rootpane.children.remove(0, size - 1)
     }
 
     new Stage{
@@ -92,5 +88,5 @@ class SFXPresenter extends SFXApplication {
             }
         }
     }
-    loadPage()
+    loadCurrentPage()
 }
