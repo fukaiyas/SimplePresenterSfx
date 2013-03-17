@@ -1,6 +1,4 @@
 package com.bugworm.scala.presenter
-import javafx.fxml.FXML
-import javafx.scene.Node
 
 /**
  * ページごとのアクションを実装するための親クラス

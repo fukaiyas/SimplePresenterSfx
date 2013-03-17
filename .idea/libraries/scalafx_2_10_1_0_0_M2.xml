@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="scalafx_2.10-1.0.0-M2">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/scalafx_2.10-1.0.0-M2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

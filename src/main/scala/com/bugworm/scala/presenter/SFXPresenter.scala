@@ -7,6 +7,8 @@ import scalafx.stage._
 import scalafx.scene.input._
 import scalafx.Includes._
 import javafx.fxml.FXMLLoader
+import com.sun.javafx.fxml.builder.JavaFXSceneBuilder
+import scalafx.application.JFXApp
 
 /**
  * デフォルト起動用object
@@ -74,10 +76,10 @@ class SFXPresenter extends SFXApplication {
         }
     }
 
-    new Stage{
+    new JFXApp.PrimaryStage{
         initStyle(StageStyle.TRANSPARENT)
         scene = new Scene(rootpane){
-            fill = null
+            delegate.setFill(null)
             onKeyPressed = {event : KeyEvent =>
 		        event.code match{
 			        case KeyCode.LEFT => movePage(-1)
@@ -86,6 +88,8 @@ class SFXPresenter extends SFXApplication {
 			        case _ =>
 		        }
             }
+            onSwipeLeft = movePage(1)
+            onSwipeRight = movePage(-1)
         }
     }
     loadCurrentPage()
